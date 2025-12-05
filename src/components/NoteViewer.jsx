@@ -99,7 +99,7 @@ const NoteViewer = ({ defaultGreeting = false }) => {
     if (defaultGreeting) {
         return (
             <div style={{ textAlign: 'center', marginTop: '4rem', color: '#666' }}>
-                <h1>欢迎来到您的笔记</h1>
+                <h1>欢迎来到Mango的笔记</h1>
                 <p>从左侧目录选择笔记开始学习。</p>
                 <p>支持 <strong>LaTeX 数学公式</strong> 和 <strong>多级折叠例题</strong>。</p>
             </div>
