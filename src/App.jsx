@@ -5,7 +5,7 @@ import NoteViewer from './components/NoteViewer'
 
 function App() {
     return (
-        <Router>
+        <Router basename="/note">
             <Layout>
                 <Routes>
                     <Route path="/" element={<NoteViewer defaultGreeting={true} />} />
