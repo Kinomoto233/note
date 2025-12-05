@@ -1,11 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import NoteViewer from './components/NoteViewer'
 
 function App() {
     return (
-        <Router basename="/note">
+        <Router>
             <Layout>
                 <Routes>
                     <Route path="/" element={<NoteViewer defaultGreeting={true} />} />
