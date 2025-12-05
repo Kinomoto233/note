@@ -1,0 +1,151 @@
+:root {
+  --color-bg-primary: #f5f5dc;
+  --color-bg-sidebar: #fdf6e3;
+  --color-text-primary: #2c3e50;
+  --color-border: #d4c4a8;
+  --color-border-dark: #b8a88a;
+  --color-accent: #8b4513;
+  --font-main: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Georgia', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4c4a8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bbaa8a;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  color: #4a3b2a;
+}
+
+/* Sidebar Link Hover Effect */
+.sidebar-note-link {
+  text-decoration: none;
+  color: #5c5c5c;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  width: 100%;
+  margin-right: 4px;
+}
+
+/* Hover State */
+.sidebar-note-link:hover {
+  background-color: rgba(139, 69, 19, 0.08);
+  border-color: var(--color-border-dark);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 
+   Active State 
+   Requirement: EXACTLY same as hover, but darker border and bold text.
+   So we copy Hover BG and Shadow exactly.
+*/
+.sidebar-note-link.active {
+  color: var(--color-accent);
+  /* Keep accent color for text */
+  font-weight: bold;
+  /* Bold as requested */
+
+  background-color: rgba(139, 69, 19, 0.08);
+  /* Exact same BG as hover */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* Exact same Shadow as hover */
+
+  border-color: var(--color-accent);
+  /* Darker/Accent border */
+}
+
+/* Ensure Active+Hover doesn't change much, maybe just maintain state */
+.sidebar-note-link.active:hover {
+  background-color: rgba(139, 69, 19, 0.08);
+  /* Keep consistent */
+  opacity: 0.9;
+}
+
+/* Nav Button Styles */
+.nav-btn {
+  background: transparent;
+  border: 1px solid #d4c4a8;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  color: #8b4513;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #8b4513;
+  color: #fff;
+  border-color: #8b4513;
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Chapter Expansion Animation */
+.chapter-list-grid {
+  display: grid;
+  transition: grid-template-rows 0.3s ease-out;
+}
