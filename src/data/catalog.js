@@ -1,6 +1,17 @@
 // ============================================
 // 笔记数据文件 / Note Data File
 // ============================================
+// [已重构] 现在数据从 src/contents/ 目录下的 .md 和 meta.json 文件自动加载
+// [Refactored] Data is now auto-loaded from .md and meta.json in src/contents/
+// ============================================
+
+import { loadCatalog } from '../utils/contentLoader';
+
+const { catalog: dynamicCatalog, notesContent: dynamicNotesContent } = loadCatalog();
+
+export const catalog = dynamicCatalog;
+export const notesContent = dynamicNotesContent;
+
 // 如何添加新笔记 / How to add a new note:
 // 1. 在 'catalog' 数组中找到对应章节，在 'notes' 里添加 { id: 'your-id', title: '标题' }
 // 2. 在 'notesContent' 对象中添加 'your-id': `Markdown内容...`
@@ -84,7 +95,7 @@ export const catalog = [
                 id: 'dsp-1',
                 title: '第一章：离散时间信号',
                 notes: [
-                    {id: 'discrete-signals', title: '序列的运算'}
+                    { id: 'discrete-signals', title: '序列的运算' }
                 ]
             }
         ]
@@ -150,9 +161,9 @@ $$ F = k \\frac{q_1 q_2}{r^2} $$
 ## 高阶导数公式
 设$f(z)$在区域$D$内解析，那么$f(z)$的导函数仍满足解析条件，且它的$n$阶导数为：
 
-$$ f^{(n)}(z_0)=\\frac{n!}{2\\pi i}\\oint\\limits_C\\frac{f(z)}{(z-z_0)^{n+1}}dz\\ (n=1, 2, \\cdots) $$
-
-$$ \\fcolorbox{#8b4513}{#fffaf0}{ \\displaystyle{z^{n+1}} } $$
+$$ 
+f^{(n)}(z_0)=\\frac{n!}{2\\pi i}\\oint\\limits_C\\frac{f(z)}{(z-z_0)^{\\color{olive} n+1}}dz\\ (n=1, 2, \\cdots) 
+$$
 
 其中$C$为在函数$f(z)$的解析区域$D$内围绕$z_0$的任何一条正向简单闭曲线，而且该曲线围成的区域全含于$D$
   `,
