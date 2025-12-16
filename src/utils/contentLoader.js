@@ -97,7 +97,8 @@ export const loadCatalog = () => {
             const chapter = getOrCreateChapter(course, chapterId);
 
             // Parse Note Info
-            const { attributes, body } = parseFrontMatter(rawContent);
+            const contentStr = typeof rawContent === 'string' ? rawContent : '';
+            const { attributes, body } = parseFrontMatter(contentStr);
 
             const basename = filename.replace('.md', '');
             const match = basename.match(/^(\d+)/);
