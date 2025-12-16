@@ -15,12 +15,26 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
     // split: ['', 'courseId', 'chapterId', 'noteId']
     const currentNoteId = (pathParts[3]) ? pathParts[3] : null;
 
-    // ... (rest of code)
+    // Dropdown state
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     // Sync state with URL location
     useEffect(() => {
         if (pathParts[1]) {
             const urlCourseId = pathParts[1];
+            // Ensure catalog is loaded and id exists to prevent flicker
             if (urlCourseId !== activeCourseId && catalog.some(c => c.id === urlCourseId)) {
                 setActiveCourseId(urlCourseId);
             }
