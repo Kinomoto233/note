@@ -74,3 +74,31 @@ $$ E = mc^2 $$
 保存 `src/data/catalog.js` 文件后，回到浏览器，网页会自动刷新。
 1. 在左侧导航栏找到你新加的笔记标题。
 2. 点击它，右侧就会显示你刚刚写的内容了！
+
+---
+
+## 💡 常用技巧 (Tips)
+
+### 1. 给公式加精美框 ✨
+我们已经通过 CSS 优化了 LaTeX 原生的 `\boxed` 命令。
+现在，您只需要使用 `\boxed` 并配合 `\displaystyle` (防止符号变小)，就能自动获得漂亮的卡片效果：
+
+```latex
+// 推荐写法
+$$ \boxed{ \displaystyle \int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi} } $$
+```
+
+### 2. 多行公式
+
+
+### 2. 多行公式
+使用 `aligned` 环境：
+
+```latex
+$$
+\begin{aligned}
+  a &= b + c \\
+  &= d + e
+\end{aligned}
+$$
+```

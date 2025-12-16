@@ -30,6 +30,19 @@ export const catalog = [
         ]
     },
     {
+        id: 'cf',
+        title: '复变函数',
+        chapters: [
+            {
+                id: 'cf-3',
+                title: '第三章 复变函数的积分',
+                notes: [
+                    { id: 'cf-c-6', title: '解析函数的高阶导数' }
+                ]
+            }
+        ]
+    },
+    {
         id: 'em-fields',
         title: '电磁场与电磁波',
         chapters: [
@@ -71,7 +84,7 @@ export const catalog = [
                 id: 'dsp-1',
                 title: '第一章：离散时间信号',
                 notes: [
-                    { id: 'discrete-signals', title: '序列的运算' }
+                    {id: 'discrete-signals', title: '序列的运算'}
                 ]
             }
         ]
@@ -131,5 +144,16 @@ $$ F = k \\frac{q_1 q_2}{r^2} $$
 # 序列的运算
 
 离散时间信号通常用序列 $x[n]$ 表示。
-  `
+  `,
+    'cf-c-6': `
+# 高阶导数
+## 高阶导数公式
+设$f(z)$在区域$D$内解析，那么$f(z)$的导函数仍满足解析条件，且它的$n$阶导数为：
+
+$$ f^{(n)}(z_0)=\\frac{n!}{2\\pi i}\\oint\\limits_C\\frac{f(z)}{(z-z_0)^{n+1}}dz\\ (n=1, 2, \\cdots) $$
+
+$$ \\boxed{ \\displaystyle \\int_a^b f(x)dx } $$
+
+其中$C$为在函数$f(z)$的解析区域$D$内围绕$z_0$的任何一条正向简单闭曲线，而且该曲线围成的区域全含于$D$
+  `,
 };
