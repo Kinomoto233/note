@@ -195,10 +195,14 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
                 </div>
 
                 <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
-                    {activeCourse && (
+                    {!activeCourse ? (
+                        <div style={{ padding: '1rem', color: '#888', textAlign: 'center' }}>
+                            暂无课程内容
+                        </div>
+                    ) : (
                         <div className="fade-in" key={activeCourse.id}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                {activeCourse.chapters.map(chapter => {
+                                {activeCourse.chapters && activeCourse.chapters.map(chapter => {
                                     const isExpanded = expandedChapters[chapter.id] !== false;
                                     return (
                                         <div key={chapter.id} style={{ marginBottom: '0.5rem' }}>
@@ -249,7 +253,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
                                                         margin: '6px 0 8px 12px',
                                                         borderLeft: '2px dashed #d4c4a8'
                                                     }}>
-                                                        {chapter.notes.map(note => {
+                                                        {chapter.notes && chapter.notes.map(note => {
                                                             const isActive = currentNoteId === note.id;
 
                                                             // Brute-force inline styles fallback
