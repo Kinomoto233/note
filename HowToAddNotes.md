@@ -80,12 +80,13 @@ $$ E = mc^2 $$
 ## 💡 常用技巧 (Tips)
 
 ### 1. 给公式加精美框 ✨
-我们已经通过 CSS 优化了 LaTeX 原生的 `\boxed` 命令。
-现在，您只需要使用 `\boxed` 并配合 `\displaystyle` (防止符号变小)，就能自动获得漂亮的卡片效果：
+推荐使用 LaTeX 原生的 `\fcolorbox` 命令，它可以同时设置边框颜色和背景颜色，非常稳定：
 
 ```latex
-// 推荐写法
-$$ \boxed{ \displaystyle \int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi} } $$
+// 语法：\fcolorbox{边框色}{背景色}{ 公式内容 }
+// 颜色支持 Hex 代码 (如 #8b4513) 或 英文名称 (如 blue, red)
+
+$$ \fcolorbox{#8b4513}{#fffaf0}{ \displaystyle \int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi} } $$
 ```
 
 ### 2. 多行公式

@@ -149,13 +149,3 @@ h6 {
   display: grid;
   transition: grid-template-rows 0.3s ease-out;
 }
-
-/* Math Formula Box Styling (Standard \boxed command) */
-.katex .fbox {
-  border: 2px solid #8b4513 !important;
-  background-color: #fffaf0;
-  padding: 8px 12px !important;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin: 4px 0;
-}
