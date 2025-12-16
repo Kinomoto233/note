@@ -86,7 +86,8 @@ $$ E = mc^2 $$
 // 语法：\fcolorbox{边框色}{背景色}{ 公式内容 }
 // 颜色支持 Hex 代码 (如 #8b4513) 或 英文名称 (如 blue, red)
 
-$$ \fcolorbox{#8b4513}{#fffaf0}{ \displaystyle \int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi} } $$
+// 注意：在 catalog.js (JS文件) 中，反斜杠需要转义，所以要用 \\
+$$ \\fcolorbox{#8b4513}{#fffaf0}{ \\displaystyle \\int_{-\infty}^{+\infty} e^{-x^2} dx = \\sqrt{\pi} } $$
 ```
 
 ### 2. 多行公式

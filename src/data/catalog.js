@@ -152,7 +152,7 @@ $$ F = k \\frac{q_1 q_2}{r^2} $$
 
 $$ f^{(n)}(z_0)=\\frac{n!}{2\\pi i}\\oint\\limits_C\\frac{f(z)}{(z-z_0)^{n+1}}dz\\ (n=1, 2, \\cdots) $$
 
-$$ \\boxed{ \\displaystyle \\int_a^b f(x)dx } $$
+$$ \\fcolorbox{#8b4513}{#fffaf0}{ \\displaystyle{z^{n+1}} } $$
 
 其中$C$为在函数$f(z)$的解析区域$D$内围绕$z_0$的任何一条正向简单闭曲线，而且该曲线围成的区域全含于$D$
   `,
