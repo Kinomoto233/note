@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command, mode }) => ({
   plugins: [react()],
-  // Use /note/ for production (GitHub Pages), / for local development
-  base: process.env.NODE_ENV === 'production' ? '/note/' : '/',
-})
+  // Use /note/ for production build (GitHub Pages), / for local dev
+  base: mode === 'production' ? '/note/' : '/',
+}))
