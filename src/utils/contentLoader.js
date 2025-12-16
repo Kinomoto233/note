@@ -16,7 +16,7 @@ const parseFrontMatter = (text) => {
         if (parts.length >= 2) {
             const key = parts[0].trim();
             const value = parts.slice(1).join(':').trim();
-            // Handle basic types if needed, but strings are fine for now
+            // Handle basic types if needed
             if (value === 'true') attributes[key] = true;
             else if (value === 'false') attributes[key] = false;
             else if (!isNaN(Number(value)) && value !== '') attributes[key] = Number(value);
@@ -28,78 +28,63 @@ const parseFrontMatter = (text) => {
 };
 
 
-// 1. Get all meta.json files for structure (Courses and Chapters)
-// Key: relative path, Value: module export
+// 1. Get all meta.json files for structure (Courses and Chapters) -> Optional enrichment
 const metaFiles = import.meta.glob('../contents/**/meta.json', { eager: true });
 
-// 2. Get all markdown files for Notes
-// Key: relative path, Value: raw string content
+// 2. Get all markdown files for Notes -> Primary source of truth
 const noteFiles = import.meta.glob('../contents/**/*.md', { eager: true, query: '?raw', import: 'default' });
 
 export const loadCatalog = () => {
     const catalog = [];
     const notesContent = {};
-
-    // Helper to find meta for a specific path
-    const getMeta = (path) => {
-        // adjust path to match glob key format
-        const key = `../contents/${path}/meta.json`;
-        return metaFiles[key] || null;
-    };
-
-    // --- Build Courses ---
-    // We assume top-level folders in src/contents are courses
     const coursesMap = new Map();
 
-    Object.keys(metaFiles).forEach(path => {
-        const parts = path.split('/');
-        // path example: "../contents/math/meta.json" -> parts[2] is 'math'
-        // path example: "../contents/math/calc-1/meta.json" -> parts[3] is 'calc-1'
+    // Helper to get or create course
+    const getOrCreateCourse = (courseId) => {
+        if (!coursesMap.has(courseId)) {
+            // Try to find meta for this course
+            const metaKey = `../contents/${courseId}/meta.json`;
+            const meta = metaFiles[metaKey] || {};
 
-        if (parts.length === 4) {
-            // It's a Course (depth 1): ../contents/{courseId}/meta.json
-            const courseId = parts[2];
-            const meta = metaFiles[path];
             coursesMap.set(courseId, {
                 id: meta.id || courseId,
-                title: meta.title || courseId,
-                order: meta.order || 99,
+                title: meta.title || courseId, // Fallback to folder name
+                order: meta.order || 999,
                 chapters: [],
-                _chaptersMap: new Map() // temporary helper
+                _chaptersMap: new Map()
             });
         }
-    });
+        return coursesMap.get(courseId);
+    };
 
-    // --- Build Chapters ---
-    Object.keys(metaFiles).forEach(path => {
-        const parts = path.split('/');
-        if (parts.length === 5) {
-            // It's a Chapter (depth 2): ../contents/{courseId}/{chapterId}/meta.json
-            const courseId = parts[2];
-            const chapterId = parts[3];
-            const meta = metaFiles[path];
+    // Helper to get or create chapter
+    const getOrCreateChapter = (course, chapterId) => {
+        if (!course._chaptersMap.has(chapterId)) {
+            // Try to find meta for this chapter
+            const metaKey = `../contents/${course.id}/${chapterId}/meta.json`;
+            const meta = metaFiles[metaKey] || {};
 
-            const course = coursesMap.get(courseId);
-            if (course) {
-                const chapter = {
-                    id: meta.id || chapterId,
-                    title: meta.title || chapterId,
-                    order: meta.order || 99,
-                    notes: []
-                };
-                course._chaptersMap.set(chapterId, chapter);
-                course.chapters.push(chapter);
-            }
+            // Infer order from folder name (e.g., "1", "2-limits")
+            const match = chapterId.match(/^(\d+)/);
+            const inferredOrder = match ? parseInt(match[1], 10) : 999;
+
+            const chapter = {
+                id: meta.id || chapterId,
+                title: meta.title || chapterId, // Fallback to folder name
+                order: meta.order !== undefined ? meta.order : inferredOrder,
+                notes: []
+            };
+            course._chaptersMap.set(chapterId, chapter);
+            course.chapters.push(chapter);
         }
-    });
+        return course._chaptersMap.get(chapterId);
+    };
 
-    // --- Build Notes ---
+    // --- Build Catalog from Note Files (structure source of truth) ---
     Object.keys(noteFiles).forEach(path => {
         const parts = path.split('/');
-        // Example: "../contents/math/calc-1/limits.md"
-        // parts[2]: courseId
-        // parts[3]: chapterId
-        // parts[4]: filename.md
+        // Expected: "../contents/courseId/chapterId/noteId.md"
+        // parts[0]="..", [1]="contents", [2]=course, [3]=chapter, [4]=note
 
         if (parts.length === 5) {
             const courseId = parts[2];
@@ -107,36 +92,31 @@ export const loadCatalog = () => {
             const filename = parts[4];
             const rawContent = noteFiles[path];
 
-            // Parse FrontMatter
+            // Get or create logical structure
+            const course = getOrCreateCourse(courseId);
+            const chapter = getOrCreateChapter(course, chapterId);
+
+            // Parse Note Info
             const { attributes, body } = parseFrontMatter(rawContent);
 
-            // Infer ID and Order from filename
-            // Example: "1.md" -> id: "1", order: 1
-            // Example: "2-intro.md" -> id: "2-intro", order: 2
             const basename = filename.replace('.md', '');
             const match = basename.match(/^(\d+)/);
             const inferredOrder = match ? parseInt(match[1], 10) : 999;
 
             const noteId = attributes.id || basename;
             const noteOrder = attributes.order !== undefined ? attributes.order : inferredOrder;
+            const noteTitle = attributes.title || basename;
 
-            // Create a composite key for global lookup: course/chapter/note
+            // Add note to structure
+            chapter.notes.push({
+                id: noteId,
+                title: noteTitle,
+                order: noteOrder
+            });
+
+            // Store content globally
             const lookupKey = `${courseId}/${chapterId}/${noteId}`;
-
-            const course = coursesMap.get(courseId);
-            if (course) {
-                const chapter = course._chaptersMap.get(chapterId);
-                if (chapter) {
-                    chapter.notes.push({
-                        id: noteId,
-                        title: attributes.title || noteId,
-                        order: noteOrder
-                    });
-
-                    // Store content with composite key
-                    notesContent[lookupKey] = body;
-                }
-            }
+            notesContent[lookupKey] = body;
         }
     });
 
