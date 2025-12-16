@@ -1,15 +1,14 @@
-import React from 'react'
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import NoteViewer from './components/NoteViewer'
 
 function App() {
     return (
-        <Router>
+        <Router basename={import.meta.env.BASE_URL}>
             <Layout>
                 <Routes>
                     <Route path="/" element={<NoteViewer defaultGreeting={true} />} />
-                    <Route path="/note/:subject/:chapter/:noteId" element={<NoteViewer />} />
+                    <Route path="/:subject/:chapter/:noteId" element={<NoteViewer />} />
                 </Routes>
             </Layout>
         </Router>

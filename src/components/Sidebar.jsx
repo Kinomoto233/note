@@ -11,35 +11,22 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
 
     // Parse URL to get active IDs
     const pathParts = location.pathname.split('/');
-    // URL structure: /note/:courseId/:chapterId/:noteId
-    // split: ['', 'note', 'courseId', 'chapterId', 'noteId']
-    const currentNoteId = (pathParts[1] === 'note' && pathParts[4]) ? pathParts[4] : null;
+    // URL structure: /:courseId/:chapterId/:noteId
+    // split: ['', 'courseId', 'chapterId', 'noteId']
+    const currentNoteId = (pathParts[3]) ? pathParts[3] : null;
 
-    // Dropdown state
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
-
-    // Close dropdown when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsDropdownOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    // ... (rest of code)
 
     // Sync state with URL location
     useEffect(() => {
-        if (pathParts[1] === 'note' && pathParts[2]) {
-            const urlCourseId = pathParts[2];
-            if (urlCourseId !== activeCourseId) {
+        if (pathParts[1]) {
+            const urlCourseId = pathParts[1];
+            if (urlCourseId !== activeCourseId && catalog.some(c => c.id === urlCourseId)) {
                 setActiveCourseId(urlCourseId);
             }
 
             // Auto expand chapter if we are in one
-            const urlChapterId = pathParts[3];
+            const urlChapterId = pathParts[2];
             if (urlChapterId) {
                 setExpandedChapters(prev => ({ ...prev, [urlChapterId]: true }));
             }
@@ -277,7 +264,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
                                                             return (
                                                                 <li key={note.id} style={{ marginBottom: '4px', paddingLeft: '8px' }}>
                                                                     <Link
-                                                                        to={`/note/${activeCourse.id}/${chapter.id}/${note.id}`}
+                                                                        to={`/${activeCourse.id}/${chapter.id}/${note.id}`}
                                                                         onClick={isMobile ? onClose : undefined}
                                                                         className={`sidebar-note-link ${isActive ? 'active' : ''}`}
                                                                         title={note.title}

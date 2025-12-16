@@ -81,8 +81,16 @@ export const loadCatalog = () => {
 
             // Parse FrontMatter
             const { attributes, body } = fm(rawContent);
-            // Use filename as ID if not specified, prefer clean IDs
-            const noteId = attributes.id || filename.replace('.md', '');
+
+            // Infer ID and Order from filename
+            // Example: "1.md" -> id: "1", order: 1
+            // Example: "2-intro.md" -> id: "2-intro", order: 2
+            const basename = filename.replace('.md', '');
+            const match = basename.match(/^(\d+)/);
+            const inferredOrder = match ? parseInt(match[1], 10) : 999;
+
+            const noteId = attributes.id || basename;
+            const noteOrder = attributes.order !== undefined ? attributes.order : inferredOrder;
 
             // Create a composite key for global lookup: course/chapter/note
             const lookupKey = `${courseId}/${chapterId}/${noteId}`;
@@ -94,7 +102,7 @@ export const loadCatalog = () => {
                     chapter.notes.push({
                         id: noteId,
                         title: attributes.title || noteId,
-                        order: attributes.order || 99
+                        order: noteOrder
                     });
 
                     // Store content with composite key

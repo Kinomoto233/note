@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Changed to relative path for better compatibility
+  base: '/note/', // Absolute path for GH Pages with BrowserRouter
 })
