@@ -1,4 +1,32 @@
-import fm from 'front-matter';
+// Simple FrontMatter parser to avoid dependency issues in browser
+const parseFrontMatter = (text) => {
+    const pattern = /^---\r?\n([\s\S]*?)\r?\n---/;
+    const match = text.match(pattern);
+
+    if (!match) {
+        return { attributes: {}, body: text };
+    }
+
+    const yamlBlock = match[1];
+    const body = text.replace(pattern, '').trim();
+
+    const attributes = {};
+    yamlBlock.split('\n').forEach(line => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+            const key = parts[0].trim();
+            const value = parts.slice(1).join(':').trim();
+            // Handle basic types if needed, but strings are fine for now
+            if (value === 'true') attributes[key] = true;
+            else if (value === 'false') attributes[key] = false;
+            else if (!isNaN(Number(value)) && value !== '') attributes[key] = Number(value);
+            else attributes[key] = value;
+        }
+    });
+
+    return { attributes, body };
+};
+
 
 // 1. Get all meta.json files for structure (Courses and Chapters)
 // Key: relative path, Value: module export
@@ -80,7 +108,7 @@ export const loadCatalog = () => {
             const rawContent = noteFiles[path];
 
             // Parse FrontMatter
-            const { attributes, body } = fm(rawContent);
+            const { attributes, body } = parseFrontMatter(rawContent);
 
             // Infer ID and Order from filename
             // Example: "1.md" -> id: "1", order: 1
