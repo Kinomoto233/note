@@ -94,7 +94,8 @@ const RenderTree = ({ data }) => {
 };
 
 const NoteViewer = ({ defaultGreeting = false }) => {
-    const { noteId } = useParams();
+    // Current route in App.jsx: /note/:subject/:chapter/:noteId
+    const { subject, chapter, noteId } = useParams();
 
     if (defaultGreeting) {
         return (
@@ -106,7 +107,9 @@ const NoteViewer = ({ defaultGreeting = false }) => {
         );
     }
 
-    const content = notesContent[noteId];
+    // Construct lookup key to match contentLoader
+    const lookupKey = `${subject}/${chapter}/${noteId}`;
+    const content = notesContent[lookupKey];
 
     if (!content) {
         return <div>找不到该笔记。</div>;

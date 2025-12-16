@@ -81,7 +81,11 @@ export const loadCatalog = () => {
 
             // Parse FrontMatter
             const { attributes, body } = fm(rawContent);
+            // Use filename as ID if not specified, prefer clean IDs
             const noteId = attributes.id || filename.replace('.md', '');
+
+            // Create a composite key for global lookup: course/chapter/note
+            const lookupKey = `${courseId}/${chapterId}/${noteId}`;
 
             const course = coursesMap.get(courseId);
             if (course) {
@@ -93,8 +97,8 @@ export const loadCatalog = () => {
                         order: attributes.order || 99
                     });
 
-                    // Store content
-                    notesContent[noteId] = body;
+                    // Store content with composite key
+                    notesContent[lookupKey] = body;
                 }
             }
         }
