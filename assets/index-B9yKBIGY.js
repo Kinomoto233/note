@@ -53,13 +53,13 @@ title: 泰勒级数
 <Collapsible title="例">
 求$e^z$在$z=0$处的泰勒展开式.
 <Collapsible title="解">
-$$
-{(e^z)}^{(n)}=e^z
-\\left(e^z\\right)^{(n)}\\Big|_{z=0} = 1
-\\therefore e^z=1+z+\\frac{z^2}{2!}+\\cdots+\\frac{z^n}{n!}+\\cdots=\\sum\\limits_{n=0}^\\infty \\frac{z^n}{n!}
-\\because e^z \\text{ 在复平面处处解析}
-\\therefore \\text{级数的收敛半径 } R = \\infty
-$$
+\${(e^z)}^{(n)}=e^z$
+
+$\\left(e^z\\right)^{(n)}\\Big|_{z=0} = 1$
+
+$e^z=1+z+\\frac{z^2}{2!}+\\cdots+\\frac{z^n}{n!}+\\cdots=\\sum\\limits_{n=0}^\\infty \\frac{z^n}{n!}$
+
+由$e^z$在复平面处处解析，可得级数的收敛半径$R = \\infty$
 </Collapsible>
 </Collapsible>
 ### 2. 间接法：
@@ -286,4 +286,4 @@ order: 1
             <pre style="white-space: pre-wrap; word-wrap: break-word;">${e.toString()}
 ${e.stack||""}</pre>
         </div>
-    `},mm=async()=>{try{const{default:e}=await Zc(async()=>{const{default:n}=await import("./App-BDVxEYAA.js");return{default:n}},[]);Wl.createRoot(document.getElementById("root")).render(Ii.jsx(rs.StrictMode,{children:Ii.jsx(e,{})}))}catch(e){Oi(e)}};window.addEventListener("error",e=>Oi(e.error||e.message,"Runtime Error"));window.addEventListener("unhandledrejection",e=>Oi(e.reason,"Promise Rejection"));mm();export{vm as R,hm as a,ym as c,Jc as g,Ii as j,gm as n,br as r};
+    `},mm=async()=>{try{const{default:e}=await Zc(async()=>{const{default:n}=await import("./App-DSK8LpxA.js");return{default:n}},[]);Wl.createRoot(document.getElementById("root")).render(Ii.jsx(rs.StrictMode,{children:Ii.jsx(e,{})}))}catch(e){Oi(e)}};window.addEventListener("error",e=>Oi(e.error||e.message,"Runtime Error"));window.addEventListener("unhandledrejection",e=>Oi(e.reason,"Promise Rejection"));mm();export{vm as R,hm as a,ym as c,Jc as g,Ii as j,gm as n,br as r};
