@@ -149,3 +149,18 @@ h6 {
   display: grid;
   transition: grid-template-rows 0.3s ease-out;
 }
+
+/* Math Rendering Alignment */
+.katex-display {
+  text-align: left !important;
+  margin: 1em 0 !important;
+  padding-left: 1.5em !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Fix vertical offset for \because and \therefore symbols */
+.katex .amsrm {
+  position: relative;
+  top: -0.18em;
+}
