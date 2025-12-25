@@ -2,9 +2,37 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
+import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
 import { notesContent } from '../data/catalog';
 import Collapsible from './Collapsible';
+
+// Preprocess markdown to handle custom math shorthand and line breaks
+const preprocessMarkdown = (text) => {
+    if (!text) return text;
+
+    // 1. Handle $$formula$$ -> block with aligned environment
+    // We ensure newlines are added around $$ to help remark-math identify it as block math
+    let processed = text.replace(/\$\$([\s\S]+?)\$\$/g, (match, p1) => {
+        const trimmed = p1.trim();
+        if (trimmed.startsWith('\\begin{aligned}') || trimmed.startsWith('\\begin{equation}')) {
+            return match;
+        }
+        return `\n$$\n\\begin{aligned}\n${trimmed}\n\\end{aligned}\n$$\n`;
+    });
+
+    // 2. Handle $formula$ -> $\displaystyle formula$
+    // Use negative lookahead/lookbehind to ensure it's exactly one $ and not an escaped \$
+    processed = processed.replace(/(?<![\\\$])\$([^\$]+?)\$(?!\$)/g, (match, p1) => {
+        const trimmed = p1.trim();
+        if (trimmed.startsWith('\\displaystyle')) {
+            return match;
+        }
+        return `$\\displaystyle ${trimmed}$`;
+    });
+
+    return processed;
+};
 
 // Simple recursive parser for nested <Collapsible> tags
 const parseContent = (text) => {
@@ -76,10 +104,10 @@ const RenderTree = ({ data }) => {
             return (
                 <ReactMarkdown
                     key={index}
-                    remarkPlugins={[remarkMath]}
+                    remarkPlugins={[remarkMath, remarkBreaks]}
                     rehypePlugins={[rehypeKatex]}
                 >
-                    {item.content}
+                    {preprocessMarkdown(item.content)}
                 </ReactMarkdown>
             );
         } else if (item.type === 'collapsible') {
