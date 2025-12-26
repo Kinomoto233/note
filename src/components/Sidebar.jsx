@@ -56,40 +56,16 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
 
     const activeCourse = catalog.find(c => c.id === activeCourseId) || catalog[0];
 
-    const sidebarStyle = {
-        width: '280px',
-        backgroundColor: '#fdf6e3',
-        borderRight: '1px solid #e0d0b8',
-        height: '100%',
-        overflowY: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        position: isMobile ? 'fixed' : 'relative',
-        top: 0,
-        left: 0,
-        zIndex: 100,
-        transform: isMobile ? (isOpen ? 'translateX(0)' : 'translateX(-100%)') : 'none',
-        transition: 'transform 0.3s ease-in-out',
-        boxShadow: isMobile && isOpen ? '2px 0 10px rgba(0,0,0,0.1)' : 'none'
-    };
-
     return (
         <>
             {isMobile && isOpen && (
                 <div
                     onClick={onClose}
-                    style={{
-                        position: 'fixed',
-                        top: 0, left: 0, right: 0, bottom: 0,
-                        backgroundColor: 'rgba(0,0,0,0.3)',
-                        zIndex: 90,
-                        backdropFilter: 'blur(2px)',
-                        animation: 'fadeIn 0.2s ease-out'
-                    }}
+                    className="sidebar-overlay"
                 />
             )}
 
-            <nav style={sidebarStyle} title="课程目录">
+            <nav className={`sidebar ${isMobile && isOpen ? 'open' : ''}`} title="课程目录">
                 <div style={{
                     padding: '1rem',
                     borderBottom: '1px solid #e0d0b8',

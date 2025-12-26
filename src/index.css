@@ -7,6 +7,25 @@
   --color-accent: #8b4513;
   --font-main: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-serif: 'Georgia', serif;
+
+  /* Responsive Variables */
+  --main-padding: 2rem;
+  --main-max-width: 1000px;
+  --sidebar-width: 280px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --main-max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --main-padding: 1rem;
+    --main-max-width: 100%;
+    --sidebar-width: 260px;
+  }
 }
 
 * {
@@ -57,6 +76,45 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #bbaa8a;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: #fdf6e3;
+  border-right: 1px solid #e0d0b8;
+  height: 100%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 90;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease-out;
 }
 
 h1,
@@ -157,13 +215,40 @@ h6 {
   padding-left: 1.5em !important;
   overflow-x: auto;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .katex-display {
+    padding-left: 0.5em !important;
+    margin: 0.8em 0 !important;
+  }
+
+  .katex {
+    font-size: 0.95em;
+  }
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--main-padding);
+  max-width: var(--main-max-width);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.note-content {
+  padding-bottom: 3rem;
 }
 
 /* Inline Math Overflow Handling */
 .katex:not(.katex-display .katex) {
   display: inline-block;
   max-width: 100%;
-  vertical-align: middle;
+  vertical-align: 0.05em;
+  /* Adjusted to align better with text baseline */
   white-space: nowrap;
   /* Prevent internal wrapping of math elements */
   overflow: visible;

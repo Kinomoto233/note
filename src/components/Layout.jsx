@@ -30,15 +30,7 @@ const Layout = ({ children }) => {
                 onClose={() => setIsSidebarOpen(false)}
             />
 
-            <main style={{
-                flex: 1,
-                overflowY: 'auto',
-                padding: isMobile ? '1rem' : '2rem',
-                maxWidth: '1000px',
-                margin: '0 auto',
-                width: '100%',
-                position: 'relative'
-            }}>
+            <main className="main-content">
                 {isMobile && (
                     <button
                         onClick={() => setIsSidebarOpen(true)}

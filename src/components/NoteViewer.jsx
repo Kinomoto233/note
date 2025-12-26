@@ -146,7 +146,7 @@ const NoteViewer = ({ defaultGreeting = false }) => {
     const parsedData = parseContent(content);
 
     return (
-        <div className="note-content" style={{ paddingBottom: '3rem' }}>
+        <div className="note-content">
             <RenderTree data={parsedData} />
         </div>
     );

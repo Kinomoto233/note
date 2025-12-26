@@ -1,31 +1,30 @@
 ---
 title: 洛朗级数
+order: 2
 ---
 
 # 洛朗级数
 
 ## 定理
-$设函数f(z)在圆环域D: R_1 < |z - z_0| < R_2 内解析,\ 则 f(z) 在 D 内可展开成洛朗级数$
+设函数$f(z)$在圆环域$D: R_1<|z-z_0|<R_2$内解析，则$f(z)$在$D$内可展开成洛朗级数
 $$f(z) = \sum\limits_{n=-\infty}^{+\infty} c_n (z - z_0)^n$$
-$其中洛朗系数c_n= \frac{1}{2\pi i} \oint\limits_C \frac{f(\zeta)}{{\left(\zeta - z_0\right)}^{n+1}} d\zeta, C 为 D 内绕 z_0 的任意一条简单正向闭曲线.$
+其中洛朗系数$c_n= \frac{1}{2\pi i} \oint\limits_C \frac{f(\zeta)}{{\left(\zeta - z_0\right)}^{n+1}} d\zeta$，$C$为$D$内绕$z_0$的任意一条简单正向闭曲线。
 
 ## 求函数的洛朗展开式（直接法和间接法）
 <Collapsible title="例1">
-$在0<|z|<\infty内,\ 将\displaystyle f(z)=\frac{e^z}{z^2}展开成洛朗级数.$
+在$0<|z|<\infty$内，将$f(z)=\frac{e^z}{z^2}$展开成洛朗级数
 <Collapsible title="解法1(直接法)">
 设
 $$f(z)=\displaystyle \sum\limits_{n=-\infty}^\infty c_n z^n$$
 则
 $$c_n=\displaystyle \frac{1}{2\pi i} \oint\limits_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} d\zeta=\frac{1}{2\pi i} \oint\limits_C \frac{e^{\zeta}}{{\zeta}^{n+3}} d\zeta\displaystyle \ \ \ \ C:|z|=R(0<R<\infty)$$
 
-$当 n\leq-3 时$
+当$n\leq-3$时
 $$\displaystyle \oint\limits_C \frac{e^{\zeta}}{{\zeta}^{n+3}} d\zeta=0\\$$
 
-$
-当 n\geq-2 时,\ 由高阶导数公式,\ 得\\
-$
+当$n\geq-2$时，由高阶导数公式，得
 $$
-&\displaystyle c_n=\frac{1}{2\pi i} \oint\limits_C \frac{e^{\zeta}}{{\zeta}^{n+3}} d\zeta=\frac{1}{(n+2)!}(e^z)^{(n+2)}\bigg|_{z=0}=\frac{1}{(n+2)!}\\
+c_n=\frac{1}{2\pi i} \oint\limits_C \frac{e^{\zeta}}{{\zeta}^{n+3}} d\zeta=\frac{1}{(n+2)!}(e^z)^{(n+2)}\bigg|_{z=0}=\frac{1}{(n+2)!}\\
 $$
 所以 
 $$
@@ -40,7 +39,7 @@ $$
 </Collapsible>
 
 <Collapsible title="例2">
-$将函数\frac{\sin z}{z}在z_0=0的去心邻域内展开成洛朗级数.$
+将函数$\frac{\sin z}{z}$在$z_0=0$的去心邻域内展开成洛朗级数
 <Collapsible title="解">
 $$\frac{\sin z}{z}=\frac{1}{z}\sum\limits_{n=0}^\infty \frac{(-1)^n z^{2n+1}}{(2n+1)!}=\sum\limits_{n=0}^\infty \frac{(-1)^n z^{2n}}{(2n+1)!}，0<|z|<\infty$$
 
@@ -48,63 +47,63 @@ $$\frac{\sin z}{z}=\frac{1}{z}\sum\limits_{n=0}^\infty \frac{(-1)^n z^{2n+1}}{(2
 </Collapsible>
 
 <Collapsible title="例3">
-$将函数z{(z-2)}^{-1}在0<|z-2|<2内展开成洛朗级数.$
+将函数$z{(z-2)}^{-1}$在$0<|z-2|<2$内展开成洛朗级数
 <Collapsible title="解">
-$在 0<|z-2|<2 内$
+在$0<|z-2|<2$内
 $$\frac{1}{z(z-2)}=\frac{1}{z-2}\cdot \frac{1}{2+(z-2)}=\frac{1}{z-2}\left(\frac{1}{2}\cdot \frac{1}{1+\frac{z-2}{2}}\right)=\frac{1}{z-2}\cdot \frac{1}{2}\sum\limits_{n=0}^\infty (-1)^n{\left(\frac{z-2}{2}\right)}^n=\sum\limits_{n=0}^\infty \frac{(-1)^n{(z-2)}^{n-1}}{2^{n+1}}$$
 </Collapsible>
 </Collapsible>
 
 <Collapsible title="例4">
-$函数f(z)=\frac{1}{(z-1)(z-2)}在圆环域:$
+函数$f(z)=\frac{1}{(z-1)(z-2)}$在圆环域:
 
 $1)\ 0<|z|<1;\ \ \ \ 2)\ 1<|z|<2;\ \ \ \ 3)\ 2<|z|<+\infty.$ 
 
-$内是处处解析的，试把f(z)在这些区域内展开成洛朗级数.$
+内是处处解析的，试把$f(z)$在这些区域内展开成洛朗级数
 <Collapsible title="解">
 $$f(z)=\frac{1}{(z-1)(z-2)}=\frac{1}{1-z}-\frac{1}{2-z}$$
 
-$1)\ 在0<|z|<1内$
+$1)$ 在$0<|z|<1$内
 
 $$由\left|z\right|<1得\left|\frac{z}{2}\right|<1$$
 
-$则$
+则
 $$\frac{1}{1-z}=\sum\limits_{n=0}^\infty z^n,\ \ \ \ \frac{1}{2-z}=\frac{1}{2}\cdot \frac{1}{1-\frac{z}{2}}=\frac{1}{2}\sum\limits_{n=0}^\infty {\left(\frac{z}{2}\right)}^n$$
 
-$所以$
+所以
 $$f(z)=\sum\limits_{n=0}^\infty z^n-\frac{1}{2}\sum\limits_{n=0}^\infty {\left(\frac{z}{2}\right)}^n=\sum\limits_{n=0}^\infty \left(1-\frac{1}{2^{n+1}}\right)z^n$$
 
-$2)\ 在1<|z|<2内$
+$2)$ 在$1<|z|<2$内
 
 $$由&|z|>1得 |\frac{1}{z}|<1;\\
 &|z|<2得 |\frac{z}{2}|<1$$
-$所以$
+所以
 $$\frac{1}{1-z}=-\frac{1}{z}\cdot \frac{1}{1-\frac{1}{z}}=-\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{1}{z}\right)}^n=-\sum\limits_{n=0}^\infty {\left(\frac{1}{z}\right)}^{n+1}$$
 $$\frac{1}{2-z}=\frac{1}{2}\cdot \frac{1}{1-\frac{z}{2}}=\frac{1}{2}\sum\limits_{n=0}^\infty {\left(\frac{z}{2}\right)}^n$$
 
-$所以$
+所以
 $$f(z)=\frac{1}{2}\sum\limits_{n=0}^\infty {\left(\frac{z}{2}\right)}^{n}-\sum\limits_{n=0}^\infty {\left(\frac{1}{z}\right)}^{n+1}$$
-$3)\ 在2<|z|<+\infty内$
+$3)$ 在$2<|z|<+\infty$内
 $$由|z|>2得\left|\frac{1}{z}\right|<\left|\frac{2}{z}\right|<1\\$$
 $$\frac{1}{2-z}=-\frac{1}{z}\cdot \frac{1}{1-\frac{2}{z}}=-\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{2}{z}\right)}^n$$
-$所以$
-$$\displaystyle f(z)=\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{2}{z}\right)}^{n}-\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{1}{z}\right)}^{n}=\sum\limits_{n=0}^\infty {\frac{2^n-1}{z^{n+1}}}$$
+所以
+$$f(z)=\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{2}{z}\right)}^{n}-\frac{1}{z}\sum\limits_{n=0}^\infty {\left(\frac{1}{z}\right)}^{n}=\sum\limits_{n=0}^\infty {\frac{2^n-1}{z^{n+1}}}$$
 </Collapsible>
 </Collapsible>
 
 <Collapsible title="例5">
-$求f(z)=\frac{z^2-2z+5}{(z-2)\left(z^2+1\right)}在以下圆环域:\\$
+求$f(z)=\frac{z^2-2z+5}{(z-2)\left(z^2+1\right)}$在以下圆环域：
 $1)\ 1<|z|<2;$
 $2)\ 0<|z-2|<\sqrt{5}$
-$内的洛朗展开式.$
+内的洛朗展开式
 <Collapsible title="解">
-$1)\ 在1<|z|<2内$
+$1)$ 在$1<|z|<2$内
 $$f(z)&=\frac{1}{2(\frac{z}{2}-1)}-\frac{2}{z^2(1+\frac{1}{z^2})}\\
 &=-\frac{1}{2}\cdot \frac{1}{1-\frac{z}{2}}-\frac{2}{z^2}\cdot \frac{1}{1+\frac{1}{z^2}}\\
 &=-\frac{1}{2}\sum\limits_{n=0}^\infty {{\left(\frac{z}{2}\right)}^n}-\frac{2}{z^2}\sum\limits_{n=0}^\infty {{(-1)^n\left(\frac{1}{z^2}\right)}^n}\\
 &=-\frac{1}{2}\sum\limits_{n=0}^\infty {\left(\frac{z}{2}\right)}^{n}-2\sum\limits_{n=0}^\infty {(-1)^n\left(\frac{1}{z^2}\right)}^{n+2}$$
 
-$2)\ 在0<|z-2|<\sqrt{5}内$
+$2)$ 在$0<|z-2|<\sqrt{5}$ 内
 $$
 f(z)&=\frac{1}{z-2}-\frac{2}{z^2+1}\\
 &=\frac{1}{z-2}-i\left(\frac{1}{z+i}-\frac{1}{z-i}\right)\\
