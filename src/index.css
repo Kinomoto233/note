@@ -163,11 +163,10 @@ h6 {
 .katex:not(.katex-display .katex) {
   display: inline-block;
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
   vertical-align: middle;
   white-space: nowrap;
   /* Prevent internal wrapping of math elements */
+  overflow: visible;
 }
 
 /* Fix vertical offset for \because and \therefore symbols */
