@@ -163,6 +163,28 @@ $$\\displaystyle f(z) = \\sum\\limits_{n=-\\infty}^{+\\infty} c_n (z - z_0)^n$$
 <Collapsible title="例1">
 在$0<|z|<\\infty$内，将$\\displaystyle f(z)=\\frac{e^z}{z^2}$展开成洛朗级数.
 <Collapsible title="解法1(直接法)">
+$$
+&设\\\\
+f(z)=\\displaystyle \\sum\\limits_{n=-\\infty}^\\infty c_n z^n\\\\
+&则\\\\
+f(z)=\\displaystyle \\sum\\limits_{n=-\\infty}^\\infty c_n z^n\\\\
+$$
+$$
+&&c_n=\\displaystyle \\frac{1}{2\\pi i} \\oint\\limits_C \\frac{f(\\zeta)}{(\\zeta - z_0)^{n+1}} d\\zeta=\\frac{1}{2\\pi i} \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta\\displaystyle \\ \\ \\ \\ C:|z|=R(0<R<\\infty)
+
+当 n\\leq-3 时
+\\displaystyle \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta=0\\\\
+
+当 n\\geq-2 时,\\ 由高阶导数公式,\\ 得\\\\
+
+&\\ \\displaystyle c_n=\\frac{1}{2\\pi i} \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta=\\frac{1}{(n+2)!}(e^z)^{(n+2)}\\bigg|_{z=0}=\\frac{1}{(n+2)!}\\\\
+
+所以 
+
+\\displaystyle f(z)=\\sum\\limits_{n=-2}^\\infty \\frac{z^n}{(n+2)!} ，0<|z|<\\infty
+$$
+
+
 设
 $$f(z)=\\displaystyle \\sum\\limits_{n=-\\infty}^\\infty c_n z^n$$
 则
@@ -171,9 +193,11 @@ $$c_n=\\displaystyle \\frac{1}{2\\pi i} \\oint\\limits_C \\frac{f(\\zeta)}{(\\ze
 $当 n\\leq-3 时$
 $$\\displaystyle \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta=0\\\\$$
 
-$当 n\\geq-2 时,\\ 由高阶导数公式,\\ 得\\\\$
+$
+当 n\\geq-2 时,\\ 由高阶导数公式,\\ 得\\\\
+$
 $$
-&\\ \\displaystyle c_n=\\frac{1}{2\\pi i} \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta=\\frac{1}{(n+2)!}(e^z)^{(n+2)}\\bigg|_{z=0}=\\frac{1}{(n+2)!}\\\\
+&\\displaystyle c_n=\\frac{1}{2\\pi i} \\oint\\limits_C \\frac{e^{\\zeta}}{{\\zeta}^{n+3}} d\\zeta=\\frac{1}{(n+2)!}(e^z)^{(n+2)}\\bigg|_{z=0}=\\frac{1}{(n+2)!}\\\\
 $$
 所以 
 $$
@@ -476,4 +500,4 @@ order: 1
             <pre style="white-space: pre-wrap; word-wrap: break-word;">${e.toString()}
 ${e.stack||""}</pre>
         </div>
-    `},ym=async()=>{try{const{default:e}=await Zc(async()=>{const{default:t}=await import("./App-BHS7LW82.js");return{default:t}},[]);Wl.createRoot(document.getElementById("root")).render(Io.jsx(rs.StrictMode,{children:Io.jsx(e,{})}))}catch(e){Oo(e)}};window.addEventListener("error",e=>Oo(e.error||e.message,"Runtime Error"));window.addEventListener("unhandledrejection",e=>Oo(e.reason,"Promise Rejection"));ym();export{vm as R,hm as a,gm as c,Jc as g,Io as j,_m as n,br as r};
+    `},ym=async()=>{try{const{default:e}=await Zc(async()=>{const{default:t}=await import("./App-DyptTAut.js");return{default:t}},[]);Wl.createRoot(document.getElementById("root")).render(Io.jsx(rs.StrictMode,{children:Io.jsx(e,{})}))}catch(e){Oo(e)}};window.addEventListener("error",e=>Oo(e.error||e.message,"Runtime Error"));window.addEventListener("unhandledrejection",e=>Oo(e.reason,"Promise Rejection"));ym();export{vm as R,hm as a,gm as c,Jc as g,Io as j,_m as n,br as r};
