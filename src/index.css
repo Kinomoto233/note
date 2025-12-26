@@ -159,6 +159,15 @@ h6 {
   overflow-y: hidden;
 }
 
+/* Inline Math Overflow Handling */
+.katex:not(.katex-display .katex) {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
 /* Fix vertical offset for \because and \therefore symbols */
 .katex .amsrm {
   position: relative;
