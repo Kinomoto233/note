@@ -166,6 +166,8 @@ h6 {
   overflow-x: auto;
   overflow-y: hidden;
   vertical-align: middle;
+  white-space: nowrap;
+  /* Prevent internal wrapping of math elements */
 }
 
 /* Fix vertical offset for \because and \therefore symbols */
